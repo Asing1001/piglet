@@ -1,14 +1,15 @@
 ---
 // Import all required components and utilities
-import { Image } from "astro:assets";
-import type { CollectionEntry } from "astro:content";
-import AvatarBlogLarge from "@components/ui/avatars/AvatarBlogLarge.astro";
-import PrimaryCTA from "@components/ui/buttons/PrimaryCTA.astro";
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import AvatarBlogLarge from '@components/ui/avatars/AvatarBlogLarge.astro';
+import PrimaryCTA from '@components/ui/buttons/PrimaryCTA.astro';
+import type { BlogPost, TypeBlogPostFields } from '@/contentful/contentful';
 
-const { blogEntry, recentBlogLocale = "" } = Astro.props;
+const { blogEntry, recentBlogLocale = '' } = Astro.props;
 
 interface Props {
-  blogEntry: CollectionEntry<"blog">;
+  blogEntry: TypeBlogPostFields;
   recentBlogLocale?: string;
 }
 ---
@@ -20,11 +21,12 @@ interface Props {
     <div class="relative rounded-lg pt-[50%] sm:pt-[100%]">
       <Image
         class="absolute start-0 top-0 size-full rounded-xl object-cover"
-        src={blogEntry.data.cardImage}
-        alt={blogEntry.data.cardImageAlt}
-        draggable={"false"}
-        loading={"eager"}
-        format={"avif"}
+        src={'https:' + blogEntry.cardImage?.fields.file?.url}
+        inferSize={true}
+        alt={''}
+        draggable={'false'}
+        loading={'eager'}
+        format={'avif'}
       />
     </div>
   </div>
@@ -36,28 +38,28 @@ interface Props {
     >
       <a
         class="outline-none ring-zinc-500 transition duration-300 hover:text-orange-400 focus-visible:ring dark:text-neutral-300 dark:ring-zinc-200 dark:hover:text-neutral-50 dark:focus:outline-none"
-        href={recentBlogLocale !== "" ? `/${recentBlogLocale}/blog/${blogEntry.slug}/` : `/blog/${blogEntry.slug}/`}
+        href={recentBlogLocale !== '' ? `/${recentBlogLocale}/blog/${blogEntry.slug}/` : `/blog/${blogEntry.slug}/`}
       >
-        {blogEntry.data.description}
+        {blogEntry.description}
       </a>
     </h2>
     <!-- Container for the author's avatar and metadata -->
-    <div class="mt-6 flex items-center sm:mt-10">
+    <!-- <div class="mt-6 flex items-center sm:mt-10">
       <AvatarBlogLarge blogEntry={blogEntry} />
 
       <div class="ms-3 sm:ms-4">
         <p class="font-bold text-neutral-800 dark:text-neutral-200 sm:mb-1">
-          {blogEntry.data.author}
+          {blogEntry.author}
         </p>
         <p class="text-xs text-neutral-500">
-          {blogEntry.data.role}
+          {blogEntry.role}
         </p>
       </div>
-    </div>
+    </div> -->
     <!-- Read More button which is a link to the blog post detailed page -->
     <div class="mt-5">
       <PrimaryCTA
-        url={recentBlogLocale !== "" ? `/${recentBlogLocale}/blog/${blogEntry.slug}/` : `/blog/${blogEntry.slug}/`}
+        url={recentBlogLocale !== '' ? `/${recentBlogLocale}/blog/${blogEntry.slug}/` : `/blog/${blogEntry.slug}/`}
         title="Read More"
         data-astro-prefetch
       />
