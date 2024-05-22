@@ -1,7 +1,7 @@
 ---
-import Icon from "@components/ui/icons/Icon.astro";
+import Icon from '@components/ui/icons/Icon.astro';
 // Destructure the properties from Astro.props
-const { pageTitle, title = Astro.currentLocale === "fr" ? "Partager" : "Share", } = Astro.props;
+const { pageTitle, title = Astro.currentLocale === 'fr' ? 'Partager' : 'Share' } = Astro.props;
 
 // Define TypeScript interface for the properties
 interface Props {
@@ -17,26 +17,14 @@ type SocialPlatform = {
 
 const socialPlatforms: SocialPlatform[] = [
   {
-    name: "Facebook",
+    name: 'Facebook',
     url: `https://www.facebook.com/share.php?u=${Astro.url}&title=${pageTitle}`,
-    svg: "facebook",
-  },
-  {
-    name: "X",
-    url: `https://twitter.com/home/?status=${pageTitle}${Astro.url}`,
-    svg: "x",
-  },
-  {
-    name: "LinkedIn",
-    url: `https://www.linkedin.com/shareArticle?mini=true&url=${Astro.url}&title=${pageTitle}`,
-    svg: "linkedIn",
+    svg: 'facebook',
   },
 ];
 ---
 
-<div
-  class="hs-dropdown relative inline-flex [--auto-close:inside] [--placement:top-left]"
->
+<div class="hs-dropdown relative inline-flex [--auto-close:inside] [--placement:top-left]">
   <button
     id="hs-dropup"
     type="button"
@@ -82,13 +70,11 @@ const socialPlatforms: SocialPlatform[] = [
           stroke-linejoin="round"
         >
           <rect width="8" height="4" x="8" y="2" rx="1" ry="1"></rect>
-          <path
-            d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"
-          ></path>
+          <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
         </svg>
 
         <svg
-          class="js-clipboard-success text-neutral-700 dark:text-neutral-300 hidden h-4 w-4"
+          class="js-clipboard-success hidden h-4 w-4 text-neutral-700 dark:text-neutral-300"
           width="24"
           height="24"
           viewBox="0 0 24 24"
@@ -116,19 +102,19 @@ const socialPlatforms: SocialPlatform[] = [
 <script is:inline>
   // Initialization of Clipboard
   (function () {
-    window.addEventListener("load", () => {
-      const $clipboards = document.querySelectorAll(".js-clipboard");
+    window.addEventListener('load', () => {
+      const $clipboards = document.querySelectorAll('.js-clipboard');
       $clipboards.forEach((el) => {
         const clipboard = new ClipboardJS(el, {
           text: () => {
             return window.location.href;
           },
         });
-        clipboard.on("success", () => {
-          const $default = el.querySelector(".js-clipboard-default");
-          const $success = el.querySelector(".js-clipboard-success");
-          const $successText = el.querySelector(".js-clipboard-success-text");
-          const successText = el.dataset.clipboardSuccessText || "";
+        clipboard.on('success', () => {
+          const $default = el.querySelector('.js-clipboard-default');
+          const $success = el.querySelector('.js-clipboard-success');
+          const $successText = el.querySelector('.js-clipboard-success-text');
+          const successText = el.dataset.clipboardSuccessText || '';
           let oldSuccessText;
 
           if ($successText) {
@@ -136,16 +122,15 @@ const socialPlatforms: SocialPlatform[] = [
             $successText.textContent = successText;
           }
           if ($default && $success) {
-            $default.style.display = "none";
-            $success.style.display = "block";
+            $default.style.display = 'none';
+            $success.style.display = 'block';
           }
 
           setTimeout(function () {
-            if ($successText && oldSuccessText)
-              $successText.textContent = oldSuccessText;
+            if ($successText && oldSuccessText) $successText.textContent = oldSuccessText;
             if ($default && $success) {
-              $success.style.display = "";
-              $default.style.display = "";
+              $success.style.display = '';
+              $default.style.display = '';
             }
           }, 800);
         });

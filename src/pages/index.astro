@@ -14,14 +14,14 @@ import type { BlogPost } from '@/contentful/contentful';
 const entries = await contentfulClient.getEntries<BlogPost>({
   content_type: 'blogPost',
 });
-
+const validEntries = entries.items.filter((item) => item.fields.cardImage);
+// console.log(entries.items);
 // Get all insights posts
 const insightPosts: CollectionEntry<'insights'>[] = await getCollection('insights');
 
 // Separate the most recent post from others
-const mostRecentPost = entries.items[0];
-const otherPosts = entries.items.slice(1);
-console.log(otherPosts);
+const mostRecentPost = validEntries[0];
+const otherPosts = validEntries.slice(1);
 
 // Define variables for page content
 const title: string = 'Your Gateway to Construction Excellence';
@@ -54,15 +54,15 @@ const pageTitle: string = `Blog | ${SITE.title}`;
     inLanguage: 'en-US',
   }}
 >
+  <!--Most recent blog post-->
+  <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
+    <CardBlogRecent blogEntry={mostRecentPost.fields} />
+  </section>
   <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
     <!--Blog posts grid-->
     <div class="grid gap-6 lg:grid-cols-2">
       {otherPosts.map((blogEntry) => <CardBlog blogEntry={blogEntry.fields} />)}
     </div>
-  </section>
-  <!--Most recent blog post-->
-  <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
-    <CardBlogRecent blogEntry={mostRecentPost.fields} />
   </section>
   <!--Insights section-->
 </MainLayout>
