@@ -55,7 +55,7 @@ const pageTitle: string = `${post.title} | ${SITE.title}`;
           draggable={'false'}
           format={'avif'}
         />
-        <p
+        <div
           class="text-pretty text-lg text-neutral-700 dark:text-neutral-300"
           set:html={documentToHtmlString(post.content)}
         />
