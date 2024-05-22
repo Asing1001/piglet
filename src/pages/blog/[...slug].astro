@@ -36,6 +36,17 @@ interface Props {
 const { post } = Astro.props;
 
 const pageTitle: string = `${post.title} | ${SITE.title}`;
+const options = {
+  renderNode: {
+    'embedded-asset-block': (node) => {
+      const { file, title } = node.data.target.fields;
+      const imageUrl = file.url;
+      return `<img src="${imageUrl}" alt="${title}" />`;
+    },
+    // Optionally handle other nodes (e.g., paragraphs, headings)
+  },
+};
+const content = documentToHtmlString(post.content, options);
 ---
 
 <MainLayout title={pageTitle}>
@@ -55,10 +66,7 @@ const pageTitle: string = `${post.title} | ${SITE.title}`;
           draggable={'false'}
           format={'avif'}
         />
-        <div
-          class="text-pretty text-lg text-neutral-700 dark:text-neutral-300"
-          set:html={documentToHtmlString(post.content)}
-        />
+        <div class="text-pretty text-lg text-neutral-700 dark:text-neutral-300" set:html={content} />
       </div>
       <div class="mx-auto grid max-w-screen-lg gap-y-5 sm:flex sm:items-center sm:justify-between sm:gap-y-0">
         <!--Blog post tags-->
@@ -81,6 +89,5 @@ const pageTitle: string = `${post.title} | ${SITE.title}`;
         </div>
       </div>
     </div>
-    <PostFeedback title="Was this post helpful?" firstChoice="Yes" secondChoice="No" />
   </section>
 </MainLayout>
