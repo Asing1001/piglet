@@ -1,13 +1,13 @@
 ---
 // Import necessary modules and utilities
-import { Image } from "astro:assets";
-import { formatDate } from "@utils/utils";
-import type { CollectionEntry } from "astro:content";
+import { Image } from 'astro:assets';
+import { formatDate } from '@utils/utils';
+import type { CollectionEntry } from 'astro:content';
 
 const { blogEntry } = Astro.props;
 
 interface Props {
-  blogEntry: CollectionEntry<"blog">;
+  blogEntry: CollectionEntry<'blog'>;
 }
 ---
 
@@ -17,13 +17,13 @@ interface Props {
   data-astro-prefetch
 >
   <div>
-    <Image
+    <!-- <Image
       class="aspect-video rounded-xl"
       src={blogEntry.data.cardImage}
       alt={blogEntry.data.cardImageAlt}
       draggable={"false"}
       format={"avif"}
-    />
+    /> -->
     <!-- The title of the blog post -->
     <h3
       class="mt-2 text-balance text-lg font-medium text-neutral-800 group-hover:text-orange-400 dark:text-neutral-300 dark:group-hover:text-neutral-50"
