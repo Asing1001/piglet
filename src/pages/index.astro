@@ -1,27 +1,16 @@
 ---
-// Import necessary components, modules and types
 import MainLayout from '@/layouts/MainLayout.astro';
 import CardBlog from '@components/ui/cards/CardBlog.astro';
 import CardBlogRecent from '@components/ui/cards/CardBlogRecent.astro';
-// import CardInsight from '@components/ui/cards/CardInsight.astro';
-import { getCollection } from 'astro:content';
-import type { CollectionEntry } from 'astro:content';
 import { SITE } from '@data/constants';
-
 import { contentfulClient } from '@/contentful/contentful';
 import type { TypeBlogPostSkeleton, TypeHomepageSkeleton } from '@/contentful/generated';
-import type { Asset } from 'contentful';
 import { extractAssetUrl } from '@/contentful/extractAssetUrl';
 
 const entries = await contentfulClient.getEntries<TypeBlogPostSkeleton>({
   content_type: 'blogPost',
 });
 const validEntries = entries.items.filter((item) => item.fields.cardImage);
-// console.log(entries.items);
-// Get all insights posts
-const insightPosts: CollectionEntry<'insights'>[] = await getCollection('insights');
-
-// Separate the most recent post from others
 const mostRecentPost = validEntries[0];
 const otherPosts = validEntries.slice(1);
 const pageTitle: string = `Blog | ${SITE.title}`;
