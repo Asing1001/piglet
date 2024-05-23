@@ -1,18 +1,4 @@
-import contentful, { type Asset, type EntryFields } from "contentful";
-
-export interface TypeBlogPostFields {
-  title: EntryFields.Symbol;
-  pubDate?: EntryFields.Date;
-  description?: EntryFields.Symbol;
-  content?: EntryFields.RichText;
-  cardImage?: Asset;
-  slug?: EntryFields.Text;
-}
-
-export interface BlogPost {
-  contentTypeId: "blogPost";
-  fields: TypeBlogPostFields;
-}
+import contentful from "contentful";
 
 export const contentfulClient = contentful.createClient({
   space: import.meta.env.CONTENTFUL_SPACE_ID,

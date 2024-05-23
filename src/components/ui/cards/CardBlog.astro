@@ -1,15 +1,13 @@
 ---
 // Import necessary components and utilities
-import AvatarBlog from '@components/ui/avatars/AvatarBlog.astro';
+import type { TypeBlogPostSkeleton } from '@/contentful/generated/TypeBlogPost';
 import { Image } from 'astro:assets';
-import { formatDate } from '@utils/utils';
-import type { CollectionEntry } from 'astro:content';
-import type { TypeBlogPostFields } from '@/contentful/contentful';
+import type { Asset, Entry } from 'contentful';
 
 const { blogEntry, blogLocale = '' } = Astro.props;
 
 interface Props {
-  blogEntry: TypeBlogPostFields;
+  blogEntry: Entry<TypeBlogPostSkeleton, undefined, string>['fields'];
   blogLocale?: string;
 }
 ---
@@ -29,7 +27,7 @@ interface Props {
   >
     <Image
       class="absolute start-0 top-0 size-full object-cover transition duration-500 group-hover:scale-110"
-      src={'https:' + blogEntry.cardImage?.fields.file?.url}
+      src={'https:' + (blogEntry.cardImage as Asset)?.fields.file?.url}
       inferSize={true}
       alt={''}
       draggable={'false'}

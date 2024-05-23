@@ -9,9 +9,9 @@ import type { CollectionEntry } from 'astro:content';
 import { SITE } from '@data/constants';
 
 import { contentfulClient } from '@/contentful/contentful';
-import type { BlogPost } from '@/contentful/contentful';
+import type { TypeBlogPostSkeleton, TypeHomepageSkeleton } from '@/contentful/generated';
 
-const entries = await contentfulClient.getEntries<BlogPost>({
+const entries = await contentfulClient.getEntries<TypeBlogPostSkeleton>({
   content_type: 'blogPost',
 });
 const validEntries = entries.items.filter((item) => item.fields.cardImage);
@@ -22,16 +22,12 @@ const insightPosts: CollectionEntry<'insights'>[] = await getCollection('insight
 // Separate the most recent post from others
 const mostRecentPost = validEntries[0];
 const otherPosts = validEntries.slice(1);
-
-// Define variables for page content
-const title: string = 'Your Gateway to Construction Excellence';
-const subTitle: string =
-  'Explore the latest news, tips, and insights from ScrewFast to enhance your construction projects. From product spotlights to project management strategies, our blog is your go-to resource for all things hardware and construction.';
-const secondTitle: string = 'Insights';
-const secondSubTitle: string =
-  "Stay up-to-date with the latest trends and developments in the construction industry with insights from ScrewFast's team of industry experts. ";
-
 const pageTitle: string = `Blog | ${SITE.title}`;
+
+const homeEntries = await contentfulClient.getEntries<TypeHomepageSkeleton>({
+  content_type: 'homepage',
+  limit: 1,
+});
 ---
 
 <MainLayout
@@ -54,6 +50,23 @@ const pageTitle: string = `Blog | ${SITE.title}`;
     inLanguage: 'en-US',
   }}
 >
+  <section
+    class="absolute left-0 top-0 flex h-[800px] w-screen items-center justify-center bg-cover bg-center"
+    style="background-image: url('/path/to/your/image.jpg');"
+  >
+    <div class="absolute inset-0 bg-black opacity-50"></div>
+    <!-- Optional overlay for better text readability -->
+    <div class="relative z-10 text-center text-white">
+      <h1 class="text-4xl font-bold">Welcome to My Website</h1>
+      <p class="mt-4 text-xl">Your amazing subtitle goes here</p>
+      <a
+        href="#your-action"
+        class="bg-blue-600 hover:bg-blue-700 mt-6 inline-block rounded px-6 py-3 font-semibold text-white"
+        >Get Started</a
+      >
+    </div>
+  </section>
+  <div class="h-[800px]"></div>
   <!--Most recent blog post-->
   <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
     <CardBlogRecent blogEntry={mostRecentPost.fields} />

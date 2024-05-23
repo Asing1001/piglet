@@ -4,12 +4,13 @@ import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import AvatarBlogLarge from '@components/ui/avatars/AvatarBlogLarge.astro';
 import PrimaryCTA from '@components/ui/buttons/PrimaryCTA.astro';
-import type { BlogPost, TypeBlogPostFields } from '@/contentful/contentful';
+import type { TypeBlogPostSkeleton } from '@/contentful/generated';
+import type { Entry, Asset } from 'contentful';
 
 const { blogEntry, recentBlogLocale = '' } = Astro.props;
 
 interface Props {
-  blogEntry: TypeBlogPostFields;
+  blogEntry: Entry<TypeBlogPostSkeleton, undefined, string>['fields'];
   recentBlogLocale?: string;
 }
 ---
@@ -21,7 +22,7 @@ interface Props {
     <div class="relative rounded-lg pt-[50%] sm:pt-[100%]">
       <Image
         class="absolute start-0 top-0 size-full rounded-xl object-cover"
-        src={'https:' + blogEntry.cardImage?.fields.file?.url}
+        src={'https:' + (blogEntry.cardImage as Asset)?.fields.file?.url}
         inferSize={true}
         alt={''}
         draggable={'false'}
