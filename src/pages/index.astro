@@ -10,6 +10,8 @@ import { SITE } from '@data/constants';
 
 import { contentfulClient } from '@/contentful/contentful';
 import type { TypeBlogPostSkeleton, TypeHomepageSkeleton } from '@/contentful/generated';
+import type { Asset } from 'contentful';
+import { extractAssetUrl } from '@/contentful/extractAssetUrl';
 
 const entries = await contentfulClient.getEntries<TypeBlogPostSkeleton>({
   content_type: 'blogPost',
@@ -28,6 +30,8 @@ const homeEntries = await contentfulClient.getEntries<TypeHomepageSkeleton>({
   content_type: 'homepage',
   limit: 1,
 });
+
+const home = homeEntries.items[0];
 ---
 
 <MainLayout
@@ -52,17 +56,17 @@ const homeEntries = await contentfulClient.getEntries<TypeHomepageSkeleton>({
 >
   <section
     class="absolute left-0 top-0 flex h-[800px] w-screen items-center justify-center bg-cover bg-center"
-    style="background-image: url('/path/to/your/image.jpg');"
+    style=`background-image: url('${extractAssetUrl(home.fields.heroBanner)}');`
   >
     <div class="absolute inset-0 bg-black opacity-50"></div>
     <!-- Optional overlay for better text readability -->
     <div class="relative z-10 text-center text-white">
-      <h1 class="text-4xl font-bold">Welcome to My Website</h1>
-      <p class="mt-4 text-xl">Your amazing subtitle goes here</p>
+      <h1 class="text-4xl font-bold">{home.fields.title}</h1>
+      <p class="mt-4 text-xl">{home.fields.description}</p>
       <a
-        href="#your-action"
+        href={home.fields.actionLinkUrl}
         class="bg-blue-600 hover:bg-blue-700 mt-6 inline-block rounded px-6 py-3 font-semibold text-white"
-        >Get Started</a
+        >{home.fields.actionLinkText}</a
       >
     </div>
   </section>

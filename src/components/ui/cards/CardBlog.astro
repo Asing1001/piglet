@@ -1,5 +1,6 @@
 ---
 // Import necessary components and utilities
+import { extractAssetUrl } from '@/contentful/extractAssetUrl';
 import type { TypeBlogPostSkeleton } from '@/contentful/generated/TypeBlogPost';
 import { Image } from 'astro:assets';
 import type { Asset, Entry } from 'contentful';
@@ -27,7 +28,7 @@ interface Props {
   >
     <Image
       class="absolute start-0 top-0 size-full object-cover transition duration-500 group-hover:scale-110"
-      src={'https:' + (blogEntry.cardImage as Asset)?.fields.file?.url}
+      src={extractAssetUrl(blogEntry.cardImage)}
       inferSize={true}
       alt={''}
       draggable={'false'}
