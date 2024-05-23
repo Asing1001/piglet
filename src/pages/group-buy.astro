@@ -1,0 +1,30 @@
+---
+import MainLayout from '@/layouts/MainLayout.astro';
+import { SITE } from '@data/constants';
+import { contentfulClient } from '@/contentful/contentful';
+import type { TypeBlogPostSkeleton } from '@/contentful/generated';
+import { extractAssetUrl } from '@/contentful/extractAssetUrl';
+import LeftSection from '@/components/ui/blocks/LeftSection.astro';
+
+const entries = await contentfulClient.getEntries<TypeBlogPostSkeleton>({
+  content_type: 'blogPost',
+});
+const allposts = entries.items.filter((item) => item.fields.cardImage);
+const pageTitle: string = `Blog | ${SITE.title}`;
+---
+
+<MainLayout title={pageTitle}>
+  {
+    allposts.map(({ fields: { title, description, slug, cardImage } }) => (
+      <LeftSection
+        title={title}
+        subTitle={description}
+        img={extractAssetUrl(cardImage)}
+        imgAlt={title}
+        btnExists={true}
+        btnTitle="查看詳情"
+        btnURL={`/blog/${slug}/`}
+      />
+    ))
+  }
+</MainLayout>

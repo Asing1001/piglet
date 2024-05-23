@@ -12,7 +12,7 @@ const entries = await contentfulClient.getEntries<TypeBlogPostSkeleton>({
 });
 const validEntries = entries.items.filter((item) => item.fields.cardImage);
 const mostRecentPost = validEntries[0];
-const otherPosts = validEntries.slice(1);
+const otherPosts = validEntries.slice(1, 3);
 const pageTitle: string = `Blog | ${SITE.title}`;
 
 const homeEntries = await contentfulClient.getEntries<TypeHomepageSkeleton>({
@@ -68,6 +68,12 @@ const home = homeEntries.items[0];
     <!--Blog posts grid-->
     <div class="grid gap-6 lg:grid-cols-2">
       {otherPosts.map((blogEntry) => <CardBlog blogEntry={blogEntry.fields} />)}
+    </div>
+    <div class="mt-16 flex justify-center gap-3">
+      <a
+        class="group inline-flex items-center justify-center gap-x-3 rounded-full border border-transparent bg-yellow-400 px-4 py-3 text-center text-sm font-medium text-neutral-700 outline-none ring-zinc-500 transition duration-300 hover:shadow-lg hover:shadow-yellow-500 focus-visible:ring dark:ring-zinc-200 dark:focus:outline-none 2xl:text-base"
+        href="/group-buy">更多團購優惠</a
+      >
     </div>
   </section>
   <!--Insights section-->
