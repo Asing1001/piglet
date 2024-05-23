@@ -7,7 +7,9 @@
     "start": "astro dev",
     "build": "astro check && astro build && node process-html.mjs",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "_generate-content-types": "cf-content-types-generator -s $CONTENTFUL_SPACE_ID -t $CONTENTFUL_ACCESS_TOKEN -o ./src/contentful/generated --v10",
+    "gen-type": "dotenv -- npm run _generate-content-types"
   },
   "dependencies": {
     "@astrojs/check": "^0.7.0",
@@ -21,6 +23,7 @@
     "astro-compressor": "^0.4.1",
     "cf-content-types-generator": "^2.15.1",
     "contentful": "^10.11.1",
+    "dotenv-cli": "^7.4.2",
     "globby": "^14.0.1",
     "gsap": "^3.12.5",
     "html-minifier-terser": "^7.2.0",
