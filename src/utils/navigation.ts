@@ -15,9 +15,10 @@ const footerLinks = [
 ];
 // An object of links for social icons
 const socialLinks = {
-  facebook: "https://www.facebook.com/",
-  x: "https://twitter.com/",
-  google: "https://www.google.com/",
+  facebook: "https://www.facebook.com/a",
+  instagram: "https://twitter.com/",
+  youtube: "https://www.google.com/",
+  podcast: "https://www.google.com/",
 };
 
 export default {
