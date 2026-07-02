@@ -2,13 +2,13 @@ import ogImageSrc from "@images/social.png";
 
 export const SITE = {
   title: "豬豬隊友scott & wendy",
-  tagline: "Top-quality Hardware Tools",
+  tagline: "團購優惠與生活分享",
   description:
-    "ScrewFast offers top-tier hardware tools and expert construction services to meet all your project needs. Start exploring and contact our sales team for superior quality and reliability.",
+    "豬豬隊友scott & wendy 分享團購優惠、生活好物與最新文章。",
   description_short:
-    "ScrewFast offers top-tier hardware tools and expert construction services to meet all your project needs.",
-  url: "https://screwfast.uk",
-  author: "Emil Gulamov",
+    "團購優惠、生活好物與最新文章。",
+  url: "https://piglet.vercel.app",
+  author: "豬豬隊友scott & wendy",
 };
 
 export const SEO = {
@@ -32,11 +32,10 @@ export const SEO = {
 };
 
 export const OG = {
-  locale: "en_US",
+  locale: "zh_TW",
   type: "website",
   url: SITE.url,
-  title: `${SITE.title}: : Hardware Tools & Construction Services`,
-  description:
-    "Equip your projects with ScrewFast's top-quality hardware tools and expert construction services. Trusted by industry leaders, ScrewFast offers simplicity, affordability, and reliability. Experience the difference with user-centric design and cutting-edge tools. Start exploring now!",
+  title: SITE.title,
+  description: SITE.description,
   image: ogImageSrc,
 };

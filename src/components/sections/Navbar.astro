@@ -1,12 +1,9 @@
 ---
 //Import relevant dependencies
-import ThemeIcon from '@components/ThemeIcon.astro';
 import NavLink from '@components/ui/links/NavLink.astro';
-import Authentication from './Authentication.astro';
 import enStrings from '@utils/navigation.ts';
 import frStrings from '@utils/fr/navigation.ts';
-import BrandLogo from '@components/BrandLogo.astro';
-import LanguagePicker from '@components/ui/LanguagePicker.astro';
+import { SITE } from '@data/constants';
 
 // Select the correct translation based on the page's lang prop:
 const strings = Astro.currentLocale === 'fr' ? frStrings : enStrings;
@@ -21,13 +18,13 @@ const homeUrl = Astro.currentLocale === 'fr' ? '/fr' : '/';
     aria-label="Global"
   >
     <div class="flex items-center justify-between">
-      <!-- Brand logo -->
+      <!-- Brand link -->
       <a
-        class="flex-none rounded-lg py-3 text-xl font-bold outline-none ring-zinc-500 focus-visible:ring dark:ring-zinc-200 dark:focus:outline-none"
+        class="flex-none rounded-lg py-3 text-xl font-bold text-neutral-800 outline-none ring-zinc-500 focus-visible:ring dark:text-neutral-200 dark:ring-zinc-200 dark:focus:outline-none"
         href={homeUrl}
         aria-label="Brand"
       >
-        <BrandLogo class="h-auto w-24" />
+        {SITE.title}
       </a>
       <!-- Collapse toggle for smaller screens -->
       <div class="ml-auto mr-5 md:hidden">
@@ -69,10 +66,6 @@ const homeUrl = Astro.currentLocale === 'fr' ? '/fr' : '/';
           </svg>
         </button>
       </div>
-      <!-- ThemeIcon component specifically for smaller screens -->
-      <!-- <span class="inline-block md:hidden">
-        <ThemeIcon />
-      </span> -->
     </div>
     <!-- Contains navigation links -->
     <div
@@ -85,13 +78,6 @@ const homeUrl = Astro.currentLocale === 'fr' ? '/fr' : '/';
       >
         <!-- Navigation links and Authentication component -->
         {strings.navBarLinks.map((link) => <NavLink url={link.url} name={link.name} />)}
-
-        <!-- <Authentication /> -->
-        <!-- <LanguagePicker /> -->
-        <!-- ThemeIcon component specifically for larger screens -->
-        <!-- <span class="hidden md:inline-block">
-          <ThemeIcon />
-        </span> -->
       </div>
     </div>
   </nav>

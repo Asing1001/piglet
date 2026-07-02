@@ -8,7 +8,6 @@ import { SITE } from '@data/constants';
 import { documentToHtmlString } from '@contentful/rich-text-html-renderer';
 import { contentfulClient } from '@/contentful/contentful';
 import type { TypeBlogPostSkeleton } from '@/contentful/generated';
-import type { Asset } from 'contentful';
 import { extractAssetUrl } from '@/contentful/extractAssetUrl';
 
 export async function getStaticPaths() {
