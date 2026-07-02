@@ -6,6 +6,7 @@ import { SITE } from '@data/constants';
 import { contentfulClient } from '@/contentful/contentful';
 import type { TypeBlogPostSkeleton, TypeHomepageSkeleton } from '@/contentful/generated';
 import { extractAssetUrl } from '@/contentful/extractAssetUrl';
+import { Icon } from 'astro-icon/components';
 
 const entries = await contentfulClient.getEntries<TypeBlogPostSkeleton>({
   content_type: 'blogPost',
@@ -13,7 +14,7 @@ const entries = await contentfulClient.getEntries<TypeBlogPostSkeleton>({
 const validEntries = entries.items.filter((item) => item.fields.cardImage);
 const mostRecentPost = validEntries[0];
 const otherPosts = validEntries.slice(1, 3);
-const pageTitle: string = `Blog | ${SITE.title}`;
+const pageTitle: string = `${SITE.title} | 親子旅行・育兒日常・生活選物`;
 
 const homeEntries = await contentfulClient.getEntries<TypeHomepageSkeleton>({
   content_type: 'homepage',
@@ -22,6 +23,34 @@ const homeEntries = await contentfulClient.getEntries<TypeHomepageSkeleton>({
 
 const home = homeEntries.items[0];
 const siteUrl = SITE.url;
+const heroImage = extractAssetUrl(home.fields.heroBanner);
+
+const highlights = [
+  { value: '2019', label: '環遊世界一年' },
+  { value: '4 人', label: '一家四口一起出發' },
+  { value: '真實', label: '用過才分享的選物' },
+];
+
+const pillars = [
+  {
+    icon: 'mdi:airplane',
+    title: '親子旅行',
+    body: '把行程排得剛剛好，留下孩子睡覺、吃飯、發呆和突然想停下來看的時間。',
+    accent: 'bg-sky-100 text-sky-700 dark:bg-sky-950 dark:text-sky-300',
+  },
+  {
+    icon: 'mdi:heart-outline',
+    title: '育兒日常',
+    body: '分享情緒、界線、手足相處與家庭生活裡正在練習的每一個小步驟。',
+    accent: 'bg-rose-100 text-rose-700 dark:bg-rose-950 dark:text-rose-300',
+  },
+  {
+    icon: 'mdi:shopping-outline',
+    title: '生活選物',
+    body: '團購不是越多越好，而是把真正適合家庭、旅行和育兒現場的好物整理清楚。',
+    accent: 'bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300',
+  },
+];
 ---
 
 <MainLayout
@@ -43,37 +72,150 @@ const siteUrl = SITE.url;
   }}
 >
   <section
-    class="absolute left-0 top-0 flex h-[800px] w-screen items-center justify-center bg-cover bg-center"
-    style=`background-image: url('${extractAssetUrl(home.fields.heroBanner)}');`
+    class="relative flex min-h-[760px] w-full items-center overflow-hidden bg-neutral-950 pt-24 md:min-h-[820px]"
+    style=`background-image: url('${heroImage}'); background-size: cover; background-position: center top;`
   >
-    <div class="absolute inset-0 bg-black opacity-50"></div>
-    <!-- Optional overlay for better text readability -->
-    <div class="relative z-10 text-center text-white">
-      <h1 class="text-4xl font-bold">{home.fields.title}</h1>
-      <p class="mt-4 text-xl">{home.fields.description}</p>
-      <a
-        href={home.fields.actionLinkUrl}
-        class="bg-blue-600 hover:bg-blue-700 mt-6 inline-block rounded px-6 py-3 font-semibold text-white"
-        >{home.fields.actionLinkText}</a
-      >
+    <div class="absolute inset-0 bg-gradient-to-r from-neutral-950 via-neutral-950/75 to-neutral-950/25"></div>
+    <div class="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-neutral-950 to-transparent"></div>
+    <div class="relative z-10 mx-auto w-full max-w-[85rem] px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+      <div class="max-w-4xl">
+        <p class="inline-flex items-center gap-x-2 rounded-full bg-white/15 px-4 py-2 text-sm font-semibold text-white backdrop-blur">
+          <Icon name="mdi:map-marker-path" size={18} />
+          Scott & Wendy 的一家四口生活地圖
+        </p>
+        <h1 class="mt-5 text-balance text-4xl font-bold text-white md:text-6xl md:leading-tight">
+          {home.fields.title}
+        </h1>
+        <p class="mt-5 max-w-2xl text-pretty text-lg leading-8 text-neutral-100 md:text-xl">
+          {home.fields.description}
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a
+            href={home.fields.actionLinkUrl}
+            class="inline-flex items-center gap-x-2 rounded-full bg-yellow-400 px-5 py-3 text-sm font-bold text-neutral-950 transition hover:bg-yellow-300 focus:outline-none focus-visible:ring focus-visible:ring-yellow-200"
+          >
+            <Icon name="mdi:shopping-outline" size={20} />
+            {home.fields.actionLinkText}
+          </a>
+          <a
+            href="/contact"
+            class="inline-flex items-center gap-x-2 rounded-full border border-white/30 bg-white/10 px-5 py-3 text-sm font-bold text-white backdrop-blur transition hover:bg-white/20 focus:outline-none focus-visible:ring focus-visible:ring-white"
+          >
+            <Icon name="mdi:heart-outline" size={20} />
+            認識我們
+          </a>
+        </div>
+      </div>
+
+      <div class="mt-12 grid max-w-3xl gap-3 sm:grid-cols-3">
+        {
+          highlights.map((item) => (
+            <div class="border-t border-white/30 pt-4">
+              <p class="text-2xl font-bold text-white">{item.value}</p>
+              <p class="mt-1 text-sm text-neutral-200">{item.label}</p>
+            </div>
+          ))
+        }
+      </div>
     </div>
   </section>
-  <div class="h-[800px]"></div>
-  <!--Most recent blog post-->
-  <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
-    <CardBlogRecent blogEntry={mostRecentPost.fields} />
+
+  <section class="bg-white dark:bg-neutral-950">
+    <div class="mx-auto grid max-w-[85rem] gap-8 px-4 py-12 sm:px-6 lg:grid-cols-[0.85fr_1.15fr] lg:px-8 lg:py-16">
+      <div>
+        <p class="text-sm font-semibold uppercase tracking-wide text-yellow-600 dark:text-yellow-400">
+          豬豬隊友在分享什麼
+        </p>
+        <h2 class="mt-3 text-balance text-2xl font-bold text-neutral-900 dark:text-neutral-100 md:text-4xl">
+          不追求完美路線，只留下真的能陪家庭往前走的經驗。
+        </h2>
+      </div>
+      <p class="text-pretty text-lg leading-8 text-neutral-700 dark:text-neutral-300">
+        從 25 歲環遊世界，到現在帶著兩個孩子繼續出發，豬豬隊友把旅行、育兒和生活選物整理成更好入口的內容。想找靈感、看團購、或只是確認「原來大家家裡也這樣」，都可以從這裡開始。
+      </p>
+    </div>
   </section>
-  <section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 2xl:max-w-full">
-    <!--Blog posts grid-->
+
+  <section class="border-y border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-900">
+    <div class="mx-auto max-w-[85rem] px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+      <div class="grid gap-5 md:grid-cols-3">
+        {
+          pillars.map((item) => (
+            <article class="rounded-lg bg-white p-6 shadow-sm ring-1 ring-neutral-200 dark:bg-neutral-950 dark:ring-neutral-800">
+              <div class={`inline-flex size-12 items-center justify-center rounded-full ${item.accent}`}>
+                <Icon name={item.icon} size={26} />
+              </div>
+              <h3 class="mt-5 text-xl font-bold text-neutral-900 dark:text-neutral-100">{item.title}</h3>
+              <p class="mt-3 leading-7 text-neutral-700 dark:text-neutral-300">{item.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  {
+    mostRecentPost && (
+      <section class="mx-auto max-w-[85rem] px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+        <div class="mb-8 flex flex-col justify-between gap-4 md:flex-row md:items-end">
+          <div>
+            <p class="text-sm font-semibold uppercase tracking-wide text-yellow-600 dark:text-yellow-400">
+              最新內容
+            </p>
+            <h2 class="mt-3 text-2xl font-bold text-neutral-900 dark:text-neutral-100 md:text-4xl">
+              最近正在整理的旅行、育兒與團購筆記。
+            </h2>
+          </div>
+          <a
+            href="/group-buy"
+            class="inline-flex items-center gap-x-2 text-sm font-bold text-neutral-900 underline decoration-yellow-400 decoration-2 underline-offset-4 dark:text-neutral-100"
+          >
+            看全部優惠
+            <Icon name="mdi:arrow-right" size={18} />
+          </a>
+        </div>
+
+        <CardBlogRecent blogEntry={mostRecentPost.fields} />
+      </section>
+    )
+  }
+
+  <section class="mx-auto max-w-[85rem] px-4 pb-12 sm:px-6 lg:px-8 lg:pb-16">
     <div class="grid gap-6 lg:grid-cols-2">
       {otherPosts.map((blogEntry) => <CardBlog blogEntry={blogEntry.fields} />)}
     </div>
-    <div class="mt-16 flex justify-center gap-3">
-      <a
-        class="group inline-flex items-center justify-center gap-x-3 rounded-full border border-transparent bg-yellow-400 px-4 py-3 text-center text-sm font-medium text-neutral-700 outline-none ring-zinc-500 transition duration-300 hover:shadow-lg hover:shadow-yellow-500 focus-visible:ring dark:ring-zinc-200 dark:focus:outline-none 2xl:text-base"
-        href="/group-buy">更多團購優惠</a
-      >
+  </section>
+
+  <section class="bg-neutral-950">
+    <div class="mx-auto grid max-w-[85rem] gap-8 px-4 py-12 sm:px-6 lg:grid-cols-[1fr_0.8fr] lg:px-8 lg:py-16">
+      <div>
+        <p class="text-sm font-semibold uppercase tracking-wide text-yellow-300">
+          跟上最新動態
+        </p>
+        <h2 class="mt-3 text-balance text-3xl font-bold text-white md:text-5xl">
+          最新影片、團購開團與一家四口的日常，都在社群持續更新。
+        </h2>
+      </div>
+      <div class="flex flex-col justify-end gap-3 sm:flex-row lg:flex-col">
+        <a
+          href="https://www.youtube.com/channel/UCmcfZ1mCHeJ3Bzpm0dy1sSA"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center gap-x-2 rounded-lg bg-white px-5 py-4 text-sm font-bold text-neutral-950 transition hover:bg-neutral-200"
+        >
+          <Icon name="mdi:youtube" size={24} />
+          YouTube
+        </a>
+        <a
+          href="https://www.instagram.com/piggyteammates/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center justify-center gap-x-2 rounded-lg border border-white/20 px-5 py-4 text-sm font-bold text-white transition hover:bg-white/10"
+        >
+          <Icon name="mdi:instagram" size={24} />
+          Instagram
+        </a>
+      </div>
     </div>
   </section>
-  <!--Insights section-->
 </MainLayout>

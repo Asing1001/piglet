@@ -30,9 +30,8 @@ interface Props {
       />
     </div>
   </div>
-  <!-- Container for the blog post's heading, author avatar, author's role, and read more button -->
+  <!-- Container for the blog post's heading and read more button -->
   <div class="sm:order-1">
-    <!-- Blog title which is also a hyperlink to the blog detail page  -->
     <h2
       class="text-balance text-2xl font-bold tracking-tight text-neutral-800 dark:text-neutral-200 md:text-3xl lg:text-4xl lg:leading-tight xl:text-5xl xl:leading-tight"
     >
@@ -40,27 +39,16 @@ interface Props {
         class="outline-none ring-zinc-500 transition duration-300 hover:text-orange-400 focus-visible:ring dark:text-neutral-300 dark:ring-zinc-200 dark:hover:text-neutral-50 dark:focus:outline-none"
         href={recentBlogLocale !== '' ? `/${recentBlogLocale}/blog/${blogEntry.slug}/` : `/blog/${blogEntry.slug}/`}
       >
-        {blogEntry.description}
+        {blogEntry.title}
       </a>
     </h2>
-    <!-- Container for the author's avatar and metadata -->
-    <!-- <div class="mt-6 flex items-center sm:mt-10">
-      <AvatarBlogLarge blogEntry={blogEntry} />
-
-      <div class="ms-3 sm:ms-4">
-        <p class="font-bold text-neutral-800 dark:text-neutral-200 sm:mb-1">
-          {blogEntry.author}
-        </p>
-        <p class="text-xs text-neutral-500">
-          {blogEntry.role}
-        </p>
-      </div>
-    </div> -->
-    <!-- Read More button which is a link to the blog post detailed page -->
+    <p class="mt-4 max-w-2xl text-pretty text-lg leading-8 text-neutral-700 dark:text-neutral-300">
+      {blogEntry.description}
+    </p>
     <div class="mt-5">
       <PrimaryCTA
         url={recentBlogLocale !== '' ? `/${recentBlogLocale}/blog/${blogEntry.slug}/` : `/blog/${blogEntry.slug}/`}
-        title="Read More"
+        title="閱讀更多"
         data-astro-prefetch
       />
     </div>
