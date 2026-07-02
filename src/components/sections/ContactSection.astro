@@ -37,21 +37,21 @@ const milestones = [
   },
 ];
 
-const pillars = [
+const values = [
   {
-    icon: "mdi:airplane",
-    title: "親子旅行",
-    body: "目的地、行程節奏、親子住宿、出門準備，以及帶孩子旅行時真正會遇到的細節。",
+    icon: "mdi:compass-outline",
+    title: "先生活，才內容",
+    body: "每一篇分享都先回到真實家庭場景：孩子的節奏、爸媽的體力、預算和出發當天可能發生的小變化。",
+  },
+  {
+    icon: "mdi:check-decagram-outline",
+    title: "用過才推薦",
+    body: "不把團購當成列表堆滿，而是把自己會不會再買、朋友問會不會推薦，放在最前面。",
   },
   {
     icon: "mdi:heart-outline",
-    title: "育兒日常",
-    body: "不是標準答案，而是一家人正在練習的陪伴、界線、情緒和手足相處。",
-  },
-  {
-    icon: "mdi:shopping-outline",
-    title: "生活選物",
-    body: "團購和推薦以實用為先：適合家庭生活、旅行或育兒現場，並且值得真心分享。",
+    title: "留下可參考的細節",
+    body: "好不好用、適合誰、不適合誰，都比漂亮結論更重要。希望讀完的人能更容易做自己的決定。",
   },
 ];
 ---
@@ -116,25 +116,34 @@ const pillars = [
 </section>
 
 <section class="mx-auto max-w-[85rem] px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
-  <div class="max-w-2xl">
-    <p class="text-sm font-semibold uppercase tracking-wide text-yellow-600 dark:text-yellow-400">
-      我們分享什麼
-    </p>
-    <h2 class="mt-3 text-2xl font-bold text-neutral-900 dark:text-neutral-100 md:text-4xl">
-      真實、可用，適合家庭生活的內容。
-    </h2>
-  </div>
+  <div class="grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+    <div>
+      <p class="text-sm font-semibold uppercase tracking-wide text-yellow-600 dark:text-yellow-400">
+        我們怎麼分享
+      </p>
+      <h2 class="mt-3 text-balance text-2xl font-bold text-neutral-900 dark:text-neutral-100 md:text-4xl">
+        不是把生活包裝得完美，而是把真的有幫助的經驗留下來。
+      </h2>
+      <p class="mt-5 text-pretty leading-8 text-neutral-700 dark:text-neutral-300">
+        豬豬隊友的內容從自己的家庭開始：旅行時怎麼安排行程、育兒現場怎麼調整、選物是不是真的能被日常反覆使用。這些判斷，才是我們希望讀者和合作品牌認識的部分。
+      </p>
+    </div>
 
-  <div class="mt-10 grid gap-6 md:grid-cols-3">
-    {
-      pillars.map((item) => (
-        <article class="rounded-lg border border-neutral-200 p-6 dark:border-neutral-800">
-          <Icon name={item.icon} size={32} class="text-yellow-500" />
-          <h3 class="mt-5 text-xl font-bold text-neutral-900 dark:text-neutral-100">{item.title}</h3>
-          <p class="mt-3 leading-7 text-neutral-700 dark:text-neutral-300">{item.body}</p>
-        </article>
-      ))
-    }
+    <div class="grid gap-4">
+      {
+        values.map((item) => (
+          <article class="grid gap-4 rounded-lg border border-neutral-200 p-5 sm:grid-cols-[auto_1fr] dark:border-neutral-800">
+            <div class="inline-flex size-12 items-center justify-center rounded-full bg-yellow-100 text-yellow-700 dark:bg-yellow-950 dark:text-yellow-300">
+              <Icon name={item.icon} size={26} />
+            </div>
+            <div>
+              <h3 class="text-xl font-bold text-neutral-900 dark:text-neutral-100">{item.title}</h3>
+              <p class="mt-2 leading-7 text-neutral-700 dark:text-neutral-300">{item.body}</p>
+            </div>
+          </article>
+        ))
+      }
+    </div>
   </div>
 </section>
 
