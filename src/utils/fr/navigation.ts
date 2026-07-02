@@ -8,10 +8,9 @@ const navBarLinks = [
 const footerLinks = [];
 
 const socialLinks = {
-  facebook: "#",
-  instagram: "#",
-  youtube: "#",
-  podcast: "#",
+  facebook: "https://www.facebook.com/piggyteammates/",
+  instagram: "https://www.instagram.com/piggyteammates/",
+  youtube: "https://www.youtube.com/channel/UCmcfZ1mCHeJ3Bzpm0dy1sSA",
 };
 
 export default {

@@ -15,10 +15,9 @@ const footerLinks = [
 ];
 // An object of links for social icons
 const socialLinks = {
-  facebook: "https://www.facebook.com/a",
-  instagram: "https://twitter.com/",
-  youtube: "https://www.google.com/",
-  podcast: "https://www.google.com/",
+  facebook: "https://www.facebook.com/piggyteammates/",
+  instagram: "https://www.instagram.com/piggyteammates/",
+  youtube: "https://www.youtube.com/channel/UCmcfZ1mCHeJ3Bzpm0dy1sSA",
 };
 
 export default {
