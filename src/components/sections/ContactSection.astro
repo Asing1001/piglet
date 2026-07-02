@@ -1,28 +1,168 @@
 ---
-// Define the variables that will be used in this component
-const title: string = '聯絡我們';
-const subTitle: string =
-  '有合作、團購或內容相關問題，歡迎與豬豬隊友scott & wendy 聯絡。';
+import { Icon } from "astro-icon/components";
+
+const socialLinks = [
+  {
+    label: "YouTube",
+    href: "https://www.youtube.com/channel/UCmcfZ1mCHeJ3Bzpm0dy1sSA",
+    icon: "mdi:youtube",
+  },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/piggyteammates/",
+    icon: "mdi:instagram",
+  },
+  {
+    label: "Facebook",
+    href: "https://www.facebook.com/piggyteammates/",
+    icon: "mdi:facebook",
+  },
+];
+
+const milestones = [
+  {
+    year: "2019",
+    title: "25 歲環遊世界一年",
+    body: "Scott 和 Wendy 離開熟悉的日常，踏上一段長途旅行。那一年不只是看世界，也重新理解生活、時間和家的樣子。",
+  },
+  {
+    year: "現在",
+    title: "一家四口繼續出發",
+    body: "成為爸媽後，旅程多了孩子的節奏：行李、睡眠、情緒、午餐時間，以及很多意想不到的小冒險。",
+  },
+  {
+    year: "日常",
+    title: "把實際經驗整理給你",
+    body: "從親子旅行、育兒觀察，到生活選物與團購資訊，豬豬隊友分享的是實際用過、走過、踩過也喜歡過的內容。",
+  },
+];
+
+const pillars = [
+  {
+    icon: "mdi:airplane",
+    title: "親子旅行",
+    body: "目的地、行程節奏、親子住宿、出門準備，以及帶孩子旅行時真正會遇到的細節。",
+  },
+  {
+    icon: "mdi:heart-outline",
+    title: "育兒日常",
+    body: "不是標準答案，而是一家人正在練習的陪伴、界線、情緒和手足相處。",
+  },
+  {
+    icon: "mdi:shopping-outline",
+    title: "生活選物",
+    body: "團購和推薦以實用為先：適合家庭生活、旅行或育兒現場，並且值得真心分享。",
+  },
+];
 ---
 
-<!-- Contact Us -->
-<section class="mx-auto max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14">
-  <div class="mx-auto max-w-2xl lg:max-w-5xl">
-    <div class="text-center">
-      <h1
-        class="text-balance text-2xl font-bold tracking-tight text-neutral-800 dark:text-neutral-200 md:text-4xl md:leading-tight"
-      >
-        {title}
+<section class="mx-auto max-w-[85rem] px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+  <div class="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-16">
+    <div>
+      <p class="text-sm font-semibold uppercase tracking-wide text-yellow-600 dark:text-yellow-400">
+        關於豬豬隊友
+      </p>
+      <h1 class="mt-3 text-balance text-3xl font-bold text-neutral-900 dark:text-neutral-100 md:text-5xl md:leading-tight">
+        Scott & Wendy，從兩個人的世界旅行，到一家四口的日常冒險。
       </h1>
-      <p class="mt-1 text-pretty text-neutral-600 dark:text-neutral-400">
-        {subTitle}
+      <p class="mt-5 text-pretty text-lg leading-8 text-neutral-700 dark:text-neutral-300">
+        豬豬隊友記錄親子旅行、育兒生活、家庭選物與團購資訊。這裡整理的是我們真實用過、走過、討論過，也希望能留給更多家庭參考的內容。
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a
+          href="/group-buy"
+          class="inline-flex items-center gap-x-2 rounded-full bg-yellow-400 px-5 py-3 text-sm font-semibold text-neutral-900 transition hover:bg-yellow-300 focus:outline-none focus-visible:ring focus-visible:ring-yellow-500"
+        >
+          <Icon name="mdi:shopping-outline" size={20} />
+          最新團購
+        </a>
+        <a
+          href="https://www.instagram.com/piggyteammates/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-x-2 rounded-full border border-neutral-300 px-5 py-3 text-sm font-semibold text-neutral-800 transition hover:bg-neutral-100 focus:outline-none focus-visible:ring focus-visible:ring-neutral-400 dark:border-neutral-700 dark:text-neutral-100 dark:hover:bg-neutral-800"
+        >
+          <Icon name="mdi:instagram" size={20} />
+          合作聯絡
+        </a>
+      </div>
+    </div>
+
+    <div class="border-l-4 border-yellow-400 pl-6">
+      <p class="text-pretty text-2xl font-semibold leading-9 text-neutral-900 dark:text-neutral-100">
+        「旅行不一定要等到一切完美才出發。帶著孩子，也可以用自己的速度慢慢看世界。」
+      </p>
+      <p class="mt-4 text-neutral-600 dark:text-neutral-400">
+        從 2019 年環遊世界開始，豬豬隊友把旅程中的觀察帶回日常：怎麼安排親子節奏、怎麼挑選真的好用的東西、怎麼讓家庭生活多一點彈性。
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="border-y border-neutral-200 bg-neutral-50 dark:border-neutral-800 dark:bg-neutral-950">
+  <div class="mx-auto max-w-[85rem] px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+    <div class="grid gap-8 md:grid-cols-3">
+      {
+        milestones.map((item) => (
+          <article>
+            <p class="text-sm font-bold text-yellow-600 dark:text-yellow-400">{item.year}</p>
+            <h2 class="mt-2 text-xl font-bold text-neutral-900 dark:text-neutral-100">{item.title}</h2>
+            <p class="mt-3 leading-7 text-neutral-700 dark:text-neutral-300">{item.body}</p>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<section class="mx-auto max-w-[85rem] px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
+  <div class="max-w-2xl">
+    <p class="text-sm font-semibold uppercase tracking-wide text-yellow-600 dark:text-yellow-400">
+      我們分享什麼
+    </p>
+    <h2 class="mt-3 text-2xl font-bold text-neutral-900 dark:text-neutral-100 md:text-4xl">
+      真實、可用，適合家庭生活的內容。
+    </h2>
+  </div>
+
+  <div class="mt-10 grid gap-6 md:grid-cols-3">
+    {
+      pillars.map((item) => (
+        <article class="rounded-lg border border-neutral-200 p-6 dark:border-neutral-800">
+          <Icon name={item.icon} size={32} class="text-yellow-500" />
+          <h3 class="mt-5 text-xl font-bold text-neutral-900 dark:text-neutral-100">{item.title}</h3>
+          <p class="mt-3 leading-7 text-neutral-700 dark:text-neutral-300">{item.body}</p>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<section class="bg-yellow-50 dark:bg-neutral-900">
+  <div class="mx-auto grid max-w-[85rem] gap-8 px-4 py-12 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8 lg:py-16">
+    <div>
+      <h2 class="text-2xl font-bold text-neutral-900 dark:text-neutral-100 md:text-3xl">
+        合作與聯絡
+      </h2>
+      <p class="mt-4 leading-7 text-neutral-700 dark:text-neutral-300">
+        有品牌合作、團購提案、親子旅行內容邀約，或想詢問網站上的資訊，歡迎透過社群與豬豬隊友聯絡。
       </p>
     </div>
 
-    <div class="mt-12 grid items-center gap-6 lg:grid-cols-2 lg:gap-16">
-      <div class="flex flex-col rounded-xl p-4 sm:p-6 lg:p-8"></div>
-
-      <div class="divide-y divide-neutral-300 dark:divide-neutral-700"></div>
+    <div class="grid gap-4 sm:grid-cols-3">
+      {
+        socialLinks.map((link) => (
+          <a
+            href={link.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center justify-center gap-x-2 rounded-lg border border-yellow-200 bg-white px-4 py-4 text-sm font-semibold text-neutral-900 transition hover:border-yellow-400 hover:bg-yellow-100 focus:outline-none focus-visible:ring focus-visible:ring-yellow-500 dark:border-neutral-700 dark:bg-neutral-950 dark:text-neutral-100 dark:hover:bg-neutral-800"
+          >
+            <Icon name={link.icon} size={24} />
+            {link.label}
+          </a>
+        ))
+      }
     </div>
   </div>
 </section>

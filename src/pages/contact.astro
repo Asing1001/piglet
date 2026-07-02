@@ -4,7 +4,7 @@ import MainLayout from "@/layouts/MainLayout.astro";
 import ContactSection from "@components/sections/ContactSection.astro";
 import { SITE } from "@data/constants";
 
-const pageTitle: string = `Contact | ${SITE.title}`;
+const pageTitle: string = `關於我們 | ${SITE.title}`;
 const contactUrl = `${SITE.url}/contact`;
 ---
 
@@ -16,8 +16,8 @@ const contactUrl = `${SITE.url}/contact`;
     "@type": "WebPage",
     "@id": contactUrl,
     "url": contactUrl,
-    "name": `Contact | ${SITE.title}`,
-    "description": SITE.description,
+    "name": `關於我們 | ${SITE.title}`,
+    "description": "認識豬豬隊友 Scott & Wendy：從 2019 環遊世界，到一家四口的親子旅行、育兒日常、生活選物與團購分享。",
     "isPartOf": {
       "@type": "WebSite",
       "url": SITE.url,
